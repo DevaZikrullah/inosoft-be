@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KendaraanController;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,10 @@ Route::group([
 
     Route::post('/login', [
         UserController::class, 'login'
+    ]);
+
+    Route::get('/kendaraan', [
+        KendaraanController::class, 'getAllKendaraan'
     ]);
 
 });

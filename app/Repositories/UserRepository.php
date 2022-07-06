@@ -14,13 +14,10 @@ class UserRepository
      */
     public function login($data): JsonResponse
     {
-        $credentials = [
+        if ($token = $this->guard()->attempt([
             'email' => $data['email'],
             'password' => $data['password'],
-        ];
-
-
-        if ($token = $this->guard()->attempt($credentials)) {
+        ])) {
             return $this->respondWithToken($token);
         }
 
