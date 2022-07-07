@@ -2,14 +2,16 @@
 
 namespace App\Services;
 
+use App\Models\Kendaraan;
 use App\Repositories\KendaraanRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class KendaraanServices
 {
     /**
      * @var KendaraanRepository
      */
-    protected $kendaraanRepository;
+    protected KendaraanRepository $kendaraanRepository;
 
     /**
      * @param KendaraanRepository $kendaraanRepository
@@ -20,9 +22,9 @@ class KendaraanServices
     }
 
     /**
-     * @return \App\Models\Kendaraan[]|\Illuminate\Database\Eloquent\Collection
+     * @return Kendaraan[]|Collection
      */
-    public function getAllKendaraan()
+    public function getAllKendaraan(): Collection|array
     {
         return $this->kendaraanRepository->getKendaraan();
     }

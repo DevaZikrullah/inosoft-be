@@ -4,11 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Kendaraan;
 use App\Models\Transaksi;
+use Exception;
 
 class TransaksiRepository
 {
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function addTransaksi($data): Transaksi
     {
@@ -20,17 +21,17 @@ class TransaksiRepository
 
         if ($data['stok_item'] < 0)
         {
-            throw new \Exception("if the desired stock is negative it will cause the stock in the database to be added to the desired stock");
+            throw new Exception("if the desired stock is negative it will cause the stock in the database to be added to the desired stock");
         }
 
         $kendaraan = Kendaraan::where('_id', $data['id_item'])->first();
 
         if ($kendaraan == null){
-            throw new \Exception("this id is not in the database");
+            throw new Exception("this id is not in the database");
         }
         else if ($kendaraan->stok < $data['stok_item'])
         {
-            throw new \Exception("stok tidak mencukupi");
+            throw new Exception("stok tidak mencukupi");
         }
         else {
             $kendaraan->decrement('stok', $data['stok_item']);
