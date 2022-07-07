@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\TransaksiController;
-use App\Repositories\TransaksiRepository;
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -24,14 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
 Route::group([
 
     'middleware' => 'api',
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'auth'
 
-], function ($router) {
+], function () {
 
     Route::post('/login', [
         UserController::class, 'login'
@@ -45,4 +42,11 @@ Route::group([
         TransaksiController::class, 'transaksi'
     ]);
 
+    Route::get('/history', [
+        TransaksiController::class, 'getAllHistory'
+    ]);
+
+    Route::get('/latest-history', [
+        TransaksiController::class, 'getLatestHistory'
+    ]);
 });

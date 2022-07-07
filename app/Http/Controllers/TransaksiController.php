@@ -38,4 +38,37 @@ class TransaksiController extends Controller
 
         return response()->json($result, $result['status']);
     }
+
+    public function getAllHistory(): JsonResponse
+    {
+        $result = ['status' => 200];
+
+        try {
+            $result['data'] = $this->transaksiService->getHistory();
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+
+        return response()->json($result, $result['status']);
+    }
+
+    public function getLatestHistory(): JsonResponse
+    {
+        $result = ['status' => 200];
+
+        try {
+            $result['data'] = $this->transaksiService->getLatestHistory();
+        } catch (Exception $e) {
+            $result = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
+
+        return response()->json($result, $result['status']);
+    }
+
 }

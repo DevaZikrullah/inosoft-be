@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Kendaraan;
 use App\Models\Transaksi;
-use Illuminate\Http\Request;
 
 class TransaksiRepository
 {
@@ -40,6 +39,16 @@ class TransaksiRepository
         $transaksi->tipe_kendaraan = ($kendaraan->tipe_kendaraan == 'is_mobil') ? "mobil" : "motor" ;
         $transaksi->save();
         return $transaksi;
+    }
+
+    public function history(): \Illuminate\Database\Eloquent\Collection|array
+    {
+        return Transaksi::all();
+    }
+
+    public function latestHistory()
+    {
+        return Transaksi::latest()->first();
     }
 
 }
