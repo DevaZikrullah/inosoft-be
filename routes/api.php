@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\TransaksiController;
+use App\Repositories\TransaksiRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +39,10 @@ Route::group([
 
     Route::get('/kendaraan', [
         KendaraanController::class, 'getAllKendaraan'
+    ]);
+
+    Route::post('/transaksi', [
+        TransaksiController::class, 'transaksi'
     ]);
 
 });

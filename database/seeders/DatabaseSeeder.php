@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'mesin' => "v12",
             'kapasitas_penumpang' => "4",
             'tipe' => 'hatchback',
-            'stok' => '5'
+            'stok' => 5
         ]);
 
         \App\Models\Kendaraan::factory()->create([
@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'mesin' => "B",
             'tipe_suspensi' => "Telescopic Up Side Down",
             'tipe_transmisi' => 'manual',
-            'stok' => '5'
+            'stok' => 5
         ]);
 
     }

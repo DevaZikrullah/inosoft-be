@@ -3,10 +3,12 @@
 namespace App\Services;
 
 use App\Repositories\UserRepository;
+use App\Traits\ValidateLogin;
 use Illuminate\Http\JsonResponse;
 
 class UserServices
 {
+    use ValidateLogin;
     protected UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository )
@@ -20,8 +22,8 @@ class UserServices
      */
     public function login($data): JsonResponse
     {
+        $this->validateLogin($data);
         return $this->userRepository->login($data);
     }
-
 
 }
