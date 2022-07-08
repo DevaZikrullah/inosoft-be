@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 //TODO Readme
 //Todo cek
 //TODO unittesting
-//TODO transaksi Harga
 class TransaksiController extends Controller
 {
     protected TransaksiService $transaksiService;

@@ -6,7 +6,6 @@ use App\Models\Kendaraan;
 use App\Models\Transaksi;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\This;
 
 class TransaksiRepository
 {
@@ -43,7 +42,8 @@ class TransaksiRepository
         $kendaraan = Kendaraan::where('_id', $data['id_item'])->first();
 
         $transaksi->tipe_kendaraan = ($kendaraan->tipe_kendaraan == 'is_mobil') ? "mobil" : "motor" ;
-        $transaksi->harga = $kendaraan->harga;
+        $transaksi->harga_kendaraan = $kendaraan->harga;
+        $transaksi->total_harga_kendaraan = $kendaraan->harga*$data['stok_item'];
         $transaksi->save();
         return $transaksi;
     }
