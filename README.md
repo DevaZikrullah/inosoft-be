@@ -35,10 +35,32 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 6. Jalankan project seperti biasa setelah test 
   > php artisan serve
 
-run Laravel Sail
-```
-,/vendor/bin/sail
-```
+### Untuk Docker
+
+1. Jalankan Command
+  > composer install --ignore-platform-reqs
+
+2. Setelah itu ganti host DB dengan 'mongo'
+
+3. Buat database dengan nama 'laravel_sail'
+
+4. Jalankan container docker 
+      - Untuk Windows
+        > .\vendor\bin\sail up 
+      - Untuk OS berbasis *NIX
+        > ./vendor/bin/sail up
+
+5. Setelah menjalankan command diatas. Project laravel sudah berjalan dan diakses melalui localhost seperti biasa \
+  untuk port project laravel dan database dll dapat dilihat di file docker-Compose.yml di bagian PORT untuk setiap service
+
+
+6. Setelah itu jalankan migrasi 
+      - Untuk Windows
+        > .\vendor\bin\sail php artisan migrate:fresh --seed 
+      - Untuk OS berbasis *NIX
+        > ./vendor/bin/sail php artisan migrate:fresh --seed 
+
+
 
 Buat Database = laravel_sail dengan Username dan Password
 ```env
@@ -47,10 +69,13 @@ DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
+## API Usage
 
+```
+POST : http://localhost:80/api/auth/login
+```
 Login 
 ```json
-POST : http://localhost:80/api/auth/login
 {
     "email":"test@example.com",
     "password":"password"
