@@ -21,6 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/test', [
+    \App\Repositories\TransaksiRepository::class, 'addTransaksi'
+]);
 
 Route::group([
 
@@ -42,11 +45,15 @@ Route::group([
         TransaksiController::class, 'transaksi'
     ]);
 
-    Route::get('/history', [
-        TransaksiController::class, 'getAllHistory'
+    Route::get('/history-mobil', [
+        TransaksiController::class, 'getHistoryMobil'
     ]);
 
-    Route::get('/latest-history', [
-        TransaksiController::class, 'getLatestHistory'
+    Route::get('/history-motor', [
+        TransaksiController::class, 'getHistoryMotor'
+    ]);
+
+    Route::get('/all-history', [
+        TransaksiController::class, 'getAllHistory'
     ]);
 });
