@@ -62,12 +62,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 
-Buat Database = laravel_sail dengan Username dan Password
-```env
-DB_DATABASE=laravel_sail
-DB_USERNAME=root  
-DB_PASSWORD=root
-```
+
 
 ## API Usage
 
