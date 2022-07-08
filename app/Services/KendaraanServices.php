@@ -22,10 +22,19 @@ class KendaraanServices
     }
 
     /**
-     * @return Kendaraan[]|Collection
+     * @return array
      */
-    public function getAllKendaraan(): \Illuminate\Support\Collection|array
+    public function getAllKendaraan(): array
     {
-        return $this->kendaraanRepository->getKendaraan();
+        $datakendaraan =  $this->kendaraanRepository->getKendaraan()->toArray();
+        $formatedArr = [];
+        foreach ($datakendaraan as $dt)
+        {
+            $dt['_id'] = (string)$dt['_id'];
+            $dt['updated_at'] = $dt['updated_at']->toDateTime()->format("d M Y H:i:s");
+            $dt['created_at'] = $dt['created_at']->toDateTime()->format("d M Y H:i:s");
+            $formatedArr[] = $dt;
+        }
+        return $formatedArr;
     }
 }

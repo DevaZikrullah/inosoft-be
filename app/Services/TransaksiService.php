@@ -50,7 +50,7 @@ class TransaksiService
         return $this->tranksaksiRepository->addTransaksi($data);
     }
 
-    public function getByFilter(array $data): Collection
+    public function getByFilter(array $data): array
     {
         $filter=[];
         if (isset($data['tipe_kendaraan']))
@@ -59,9 +59,22 @@ class TransaksiService
         } else if (isset($data['id']))
         {
             $filter[] = ['_id','=',$data['id']];
+        }else if (isset($data['id_item']))
+        {
+            $filter[] = ['id_item','=',$data['id_item']];
         }
 
-        return $this->tranksaksiRepository->getByFilter($filter);
+        $datahistory = $this->tranksaksiRepository->getByFilter($filter)->toArray();
+        $formatedArr = [];
+        foreach($datahistory as $dt) {
+            // we have return new array because we need to format the structure
+            $dt['_id'] = (string)$dt['_id'];
+            $dt['updated_at'] = $dt['updated_at']->toDateTime()->format("d M Y H:i:s");
+            $dt['created_at'] = $dt['created_at']->toDateTime()->format("d M Y H:i:s");
+
+            $formatedArr[] = $dt;
+        }
+        return $formatedArr;
     }
 
 }

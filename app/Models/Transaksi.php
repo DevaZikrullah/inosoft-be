@@ -8,6 +8,14 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Transaksi extends Model
 {
 
+    protected string $nama;
+    protected string $id_item;
+    protected int $stok_item;
+    /**
+     * @var mixed|string
+     */
+    protected string $tipe_kendaraan;
+    protected int $harga;
     protected $connection = 'mongodb';
 
     /**

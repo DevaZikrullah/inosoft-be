@@ -6,7 +6,10 @@ use App\Services\TransaksiService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
+//TODO Readme
+//Todo cek
+//TODO unittesting
+//TODO transaksi Harga
 class TransaksiController extends Controller
 {
     protected TransaksiService $transaksiService;
@@ -44,7 +47,8 @@ class TransaksiController extends Controller
     {
         $data = $request->only([
             'tipe_kendaraan',
-            'id'
+            'id',
+            'id_item'
         ]);
 
         try {
