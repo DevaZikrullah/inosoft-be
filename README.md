@@ -98,4 +98,15 @@ Get history dengan id transaksi
 ```
 GET  : http://localhost:80/api/auth/history?id=id transaksi
 ```
-
+Transaksi
+```
+POST  : http://localhost:80/api/auth/transaksi
+```
+ganti id_item sesuai dengan id kendaraan
+```json
+{
+    "nama":"Deva",
+    "id_item":"62c8be4c96b06bdecb0a0927",
+    "stok_item":1
+}
+```
