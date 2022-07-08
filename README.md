@@ -12,3 +12,48 @@ jwt session is available in one hour
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+run Laravel Sail
+```
+,/vendor/bin/sail
+```
+
+Buat Database = laravel_sail dengan Username dan Password
+```env
+DB_DATABASE=laravel_sail
+DB_USERNAME=root  
+DB_PASSWORD=root
+```
+
+
+Login 
+```json
+POST : http://localhost:80/api/auth/login
+{
+    "email":"test@example.com",
+    "password":"password"
+}
+```
+List Kendaraan
+```
+GET  : http://localhost:80/api/auth/kendaraan
+```
+
+List History ketika ingin melihat history transaksi dengan tipe kendaraan mobil
+ketika salah menulis url maka akan Get semua history transaksi
+
+```
+GET  : http://localhost:80/api/auth/history?tipe_kendaraan=mobil
+```
+
+Get semua history
+
+```
+GET  : http://localhost:80/api/auth/history
+```
+
+Get history dengan id transaksi
+```
+GET  : http://localhost:80/api/auth/history?id=id transaksi
+```
+
