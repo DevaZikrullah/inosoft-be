@@ -4,13 +4,12 @@ namespace App\Services;
 
 use App\Models\Transaksi;
 use App\Repositories\TransaksiRepository;
-use App\Traits\ValidateTransaksi;
+use App\Traits;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
 
 class TransaksiService
 {
-    use ValidateTransaksi;
+    use Traits\TransaksiTrait;
 
     protected TransaksiRepository $tranksaksiRepository;
 
@@ -21,23 +20,49 @@ class TransaksiService
 
 
     /**
+     * @param $data
+     * @return Transaksi
      * @throws Exception
      */
     public function transaksi($data): Transaksi
     {
         $this->validateCreate($data);
+        if ($data['stok_item'] <= 0)
+        {
+            throw new Exception("if the desired stock is negative it will cause the stock in the database to be added to the desired stock");
+        }
+        $kendaraanData = $this->tranksaksiRepository->findId($data['id_item']);
+        $kendaraanData['stok']-=$data['stok_item'];
+
+        switch ($kendaraanData)
+        {
+            case $kendaraanData == null:
+                throw new Exception("this id is not in the database");
+            case $kendaraanData['stok'] < $data['stok_item']:
+                throw new Exception("stok tidak mencukupi");
+        }
+
+        $this->tranksaksiRepository->decrement($data['id_item'],$kendaraanData['stok']);
+
+
         return $this->tranksaksiRepository->addTransaksi($data);
     }
 
-    public function getHistory(): Collection|array
+    public function getHistoryMobil(): \Illuminate\Support\Collection
     {
-        return $this->tranksaksiRepository->history();
+        return $this->tranksaksiRepository->historyMobil();
     }
 
-    public function getLatestHistory()
+    public function getHistoryMotor(): \Illuminate\Support\Collection
     {
-        return $this->tranksaksiRepository->latestHistory();
+        return $this->tranksaksiRepository->historyMotor();
     }
+
+    public function getAllHistory(): \Illuminate\Support\Collection
+    {
+        return $this->tranksaksiRepository->allHistory();
+    }
+
 }
 
 

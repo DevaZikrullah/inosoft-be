@@ -4,52 +4,57 @@ namespace App\Repositories;
 
 use App\Models\Kendaraan;
 use App\Models\Transaksi;
-use Exception;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiRepository
 {
-    /**
-     * @throws Exception
-     */
-    public function addTransaksi($data): Transaksi
+    public function findId(string $data): array
     {
+        return Kendaraan::where('_id', $data)->first()->toArray();
+    }
 
-        $transaksi = new Transaksi();
+
+    public function decrement($id,$decrement)
+    {
+        $kendaraan = Kendaraan::where('_id',$id)->first();
+        $kendaraan->stok = $decrement;
+        $kendaraan->save();
+    }
+
+    public function addTransaksi($data)
+    {
+        $transaksi = New Transaksi();
         $transaksi->nama = $data['nama'];
         $transaksi->id_item = $data['id_item'];
         $transaksi->stok_item = $data['stok_item'];
 
-        if ($data['stok_item'] < 0)
-        {
-            throw new Exception("if the desired stock is negative it will cause the stock in the database to be added to the desired stock");
-        }
 
         $kendaraan = Kendaraan::where('_id', $data['id_item'])->first();
 
-        if ($kendaraan == null){
-            throw new Exception("this id is not in the database");
-        }
-        else if ($kendaraan->stok < $data['stok_item'])
-        {
-            throw new Exception("stok tidak mencukupi");
-        }
-        else {
-            $kendaraan->decrement('stok', $data['stok_item']);
-        }
-
         $transaksi->tipe_kendaraan = ($kendaraan->tipe_kendaraan == 'is_mobil') ? "mobil" : "motor" ;
+        $transaksi->harga = $kendaraan->harga;
+
         $transaksi->save();
         return $transaksi;
     }
 
-    public function history(): \Illuminate\Database\Eloquent\Collection|array
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function historyMobil(): \Illuminate\Support\Collection
     {
-        return Transaksi::all();
+        return DB::collection('transaksis')->where('tipe_kendaraan','mobil')->get();
+    }
+    public function historyMotor(): \Illuminate\Support\Collection
+    {
+        return DB::collection('transaksis')->where('tipe_kendaraan','motor')->get();
     }
 
-    public function latestHistory()
+    public function allHistory(): \Illuminate\Support\Collection
     {
-        return Transaksi::latest()->first();
+        return DB::collection('transaksis')->get();
     }
+
+
 
 }
