@@ -13,6 +13,18 @@ jwt session is available in one hour
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+## Instalasi
+
+1. Jalankan Command
+  > composer install --ignore-platform-reqs
+
+2. Setelah itu ganti host DB dengan 'localhost'
+
+3. Buat database dengan nama 'laravel_sail'
+
+4. Lakukan migrasi database dan seed data untuk stok mobil dan motor
+  >  php artisan:migrate fresh --seed
+
 run Laravel Sail
 ```
 ,/vendor/bin/sail
