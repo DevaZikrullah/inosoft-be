@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kendaraan;
 use App\Services\KendaraanServices;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Jenssegers\Mongodb\Collection;
 
 class KendaraanController extends Controller
 {
@@ -21,10 +24,11 @@ class KendaraanController extends Controller
         $this->kendaraanServices = $kendaraanServices;
     }
 
+
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function getAllKendaraan()
+    public function getAllKendaraan(): JsonResponse
     {
         $result = ['status' => 200];
 
