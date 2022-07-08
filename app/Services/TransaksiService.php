@@ -4,12 +4,12 @@ namespace App\Services;
 
 use App\Models\Transaksi;
 use App\Repositories\TransaksiRepository;
-use App\Traits;
+use App\Validation\ValidateTransaksi;
 use Exception;
 
 class TransaksiService
 {
-    use Traits\TransaksiTrait;
+    use ValidateTransaksi;
 
     protected TransaksiRepository $tranksaksiRepository;
 
