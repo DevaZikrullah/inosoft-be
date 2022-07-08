@@ -24,6 +24,16 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 4. Lakukan migrasi database dan seed data untuk stok mobil dan motor
   >  php artisan:migrate fresh --seed
+5. Lakukan Testing menggunakan 
+     ```
+     ,/vendor/bin/sail artisan test
+     ```
+     atau
+     ```
+     php artisan test
+     ```
+6. Jalankan project seperti biasa setelah test 
+  > php artisan serve
 
 run Laravel Sail
 ```
