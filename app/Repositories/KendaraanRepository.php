@@ -4,14 +4,15 @@ namespace App\Repositories;
 
 use App\Models\Kendaraan;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class KendaraanRepository
 {
     /**
-     * @return Collection|array
+     * @return \Illuminate\Support\Collection
      */
-    public function getKendaraan(): Collection|array
+    public function getKendaraan(): \Illuminate\Support\Collection
     {
-        return Kendaraan::all();
+        return DB::collection('kendaraans')->get();
     }
 }

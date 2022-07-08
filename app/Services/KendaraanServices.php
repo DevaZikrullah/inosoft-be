@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Kendaraan;
 use App\Repositories\KendaraanRepository;
-use Illuminate\Database\Eloquent\Collection;
+use Jenssegers\Mongodb\Collection;
 
 class KendaraanServices
 {
@@ -24,7 +24,7 @@ class KendaraanServices
     /**
      * @return Kendaraan[]|Collection
      */
-    public function getAllKendaraan(): Collection|array
+    public function getAllKendaraan(): \Illuminate\Support\Collection|array
     {
         return $this->kendaraanRepository->getKendaraan();
     }
