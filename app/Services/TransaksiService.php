@@ -6,6 +6,8 @@ use App\Models\Transaksi;
 use App\Repositories\TransaksiRepository;
 use App\Validation\ValidateTransaksi;
 use Exception;
+use Illuminate\Support\Collection;
+use function PHPUnit\Framework\isNull;
 
 class TransaksiService
 {
@@ -48,19 +50,18 @@ class TransaksiService
         return $this->tranksaksiRepository->addTransaksi($data);
     }
 
-    public function getHistoryMobil(): \Illuminate\Support\Collection
+    public function getByFilter(array $data): Collection
     {
-        return $this->tranksaksiRepository->historyMobil();
-    }
+        $filter=[];
+        if (isset($data['tipe_kendaraan']))
+        {
+            $filter[] = ['tipe_kendaraan','=',$data['tipe_kendaraan']];
+        } else if (isset($data['id']))
+        {
+            $filter[] = ['_id','=',$data['id']];
+        }
 
-    public function getHistoryMotor(): \Illuminate\Support\Collection
-    {
-        return $this->tranksaksiRepository->historyMotor();
-    }
-
-    public function getAllHistory(): \Illuminate\Support\Collection
-    {
-        return $this->tranksaksiRepository->allHistory();
+        return $this->tranksaksiRepository->getByFilter($filter);
     }
 
 }

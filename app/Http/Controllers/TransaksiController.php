@@ -39,48 +39,22 @@ class TransaksiController extends Controller
         return response()->json($result, $result['status']);
     }
 
-    public function getHistoryMotor(): JsonResponse
+
+    public function History(Request $request): JsonResponse
     {
-        $result = ['status' => 200];
+        $data = $request->only([
+            'tipe_kendaraan',
+            'id'
+        ]);
 
         try {
-            $result['data'] = $this->transaksiService->getHistoryMotor();
+            $result = ['status' => 200];
+            $result['data'] = $this->transaksiService->getByFilter($data);
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
-                'error' => $e->getMessage()
-            ];
-        }
-
-        return response()->json($result, $result['status']);
-    }
-
-    public function getHistoryMobil(): JsonResponse
-    {
-        $result = ['status' => 200];
-
-        try {
-            $result['data'] = $this->transaksiService->getHistoryMobil();
-        } catch (Exception $e) {
-            $result = [
-                'status' => 500,
-                'error' => $e->getMessage()
-            ];
-        }
-
-        return response()->json($result, $result['status']);
-    }
-
-    public function getAllHistory(): JsonResponse
-    {
-        $result = ['status' => 200];
-
-        try {
-            $result['data'] = $this->transaksiService->getAllHistory();
-        } catch (Exception $e) {
-            $result = [
-                'status' => 500,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
+                'trace' => $e->getTrace()
             ];
         }
 

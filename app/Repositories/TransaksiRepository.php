@@ -4,8 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Kendaraan;
 use App\Models\Transaksi;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-
 class TransaksiRepository
 {
     public function findId(string $data): array
@@ -38,23 +38,9 @@ class TransaksiRepository
         return $transaksi;
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function historyMobil(): \Illuminate\Support\Collection
+    public function getByFilter(array $data): Collection
     {
-        return DB::collection('transaksis')->where('tipe_kendaraan','mobil')->get();
+        return DB::collection('transaksis')->where($data)->get();
     }
-    public function historyMotor(): \Illuminate\Support\Collection
-    {
-        return DB::collection('transaksis')->where('tipe_kendaraan','motor')->get();
-    }
-
-    public function allHistory(): \Illuminate\Support\Collection
-    {
-        return DB::collection('transaksis')->get();
-    }
-
-
 
 }

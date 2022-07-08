@@ -45,15 +45,7 @@ Route::group([
         TransaksiController::class, 'transaksi'
     ]);
 
-    Route::get('/history-mobil', [
-        TransaksiController::class, 'getHistoryMobil'
-    ]);
-
-    Route::get('/history-motor', [
-        TransaksiController::class, 'getHistoryMotor'
-    ]);
-
-    Route::get('/all-history', [
-        TransaksiController::class, 'getAllHistory'
+    Route::get('/history', [
+        TransaksiController::class, 'History'
     ]);
 });
